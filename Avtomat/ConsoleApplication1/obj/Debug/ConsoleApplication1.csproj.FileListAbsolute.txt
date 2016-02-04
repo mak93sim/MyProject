@@ -1,0 +1,6 @@
+c:\users\pk2\documents\visual studio 2015\Projects\Avtomat\ConsoleApplication1\bin\Debug\ConsoleApplication1.exe.config
+C:\Users\pk2\Documents\Visual Studio 2015\Projects\Avtomat\ConsoleApplication1\bin\Debug\ConsoleApplication1.exe
+C:\Users\pk2\Documents\Visual Studio 2015\Projects\Avtomat\ConsoleApplication1\bin\Debug\ConsoleApplication1.pdb
+C:\Users\pk2\Documents\Visual Studio 2015\Projects\Avtomat\ConsoleApplication1\obj\Debug\ConsoleApplication1.csprojResolveAssemblyReference.cache
+C:\Users\pk2\Documents\Visual Studio 2015\Projects\Avtomat\ConsoleApplication1\obj\Debug\ConsoleApplication1.exe
+C:\Users\pk2\Documents\Visual Studio 2015\Projects\Avtomat\ConsoleApplication1\obj\Debug\ConsoleApplication1.pdb

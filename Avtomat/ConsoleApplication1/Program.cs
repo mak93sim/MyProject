@@ -8,30 +8,28 @@ namespace ConsoleApplication1
 {
     class Avtomat
     {
-        private int one;
-        private int two;
-        private int five;
-        private int ten;
-        private int state;
-        private string product;
-        private int delivery;
-        private int keks;
-        private int pechenie;
-        private int vafli;
+        private int one;//количество 1 монет
+        private int two;//количество 2 монет
+        private int five;//количество 5 монет
+        private int ten;//количество 10 монет
+        private string product;//наименование выбранного продукта
+        private int delivery;//сдача для покупателя
+        private int keks;//количество кексов
+        private int pechenie;//количество печенья
+        private int vafli;//количество вафлей
         public Avtomat(int one,int two,int five,int ten)
         {
             this.one = one;
             this.two = two;
             this.five = five;
             this.ten = ten;
-            this.state = 1;
-            product = "Unknown";
+            product = "Unknown";//продукт не выбран
             delivery = 0;
             keks = 4;
             pechenie = 3;
             vafli = 10;
         }
-        public void select(string str)
+        public void select(string str)//выбор продукта
         {
             switch(str)
             {
@@ -67,10 +65,8 @@ namespace ConsoleApplication1
                     break;
             }
         }
-        public void buy(ref int money)
+        public void buy(ref int money)//покупка выбранного продукта
         {
-            string str = "";
-            int price = 0;
             Console.WriteLine("Input money or input exit");
             if (product == "Unknown")
             {
@@ -79,129 +75,65 @@ namespace ConsoleApplication1
             switch(product)
             {
                 case "keks":
-                    while(price<50 && str != "exit" && money>0)
-                    {
-                        str = Console.ReadLine();
-                        if (str == "1" || str == "2" || str == "5" || str == "10")
-                        {
-                            price = price + Convert.ToInt32(str, 10);
-                            if (str == "1")
-                            {
-                                one += 1;
-                                money -= 1;
-                            }
-                            if (str == "2")
-                            {
-                                two += 1;
-                                money -= 2;
-                            }
-                            if (str == "5")
-                            {
-                                five += 1;
-                                money -= 5;
-                            }
-                            if (str == "10")
-                            {
-                                ten += 1;
-                                money -= 10;
-                            }
-                        }
-                    }
-                    if (str == "exit" || money == 0)
-                    {
-                        Console.WriteLine("Not enough money");
-                    }
-                    else
-                    {
-                        Console.WriteLine("OK");
-                        delivery = price - 50;
-                        keks -= 1;
-                    }
+                    input_money(50, ref money, ref keks);
                     break;
                 case "pechenie":
-                    while (price < 10 && str != "exit")
-                    {
-                        str = Console.ReadLine();
-                        if (str == "1" || str == "2" || str == "5" || str == "10")
-                        {
-                            price = price + Convert.ToInt32(str, 10);
-                            if (str == "1")
-                            {
-                                one += 1;
-                                money -= 1;
-                            }
-                            if (str == "2")
-                            {
-                                two += 1;
-                                money -= 2;
-                            }
-                            if (str == "5")
-                            {
-                                five += 1;
-                                money -= 5;
-                            }
-                            if (str == "10")
-                            {
-                                ten += 1;
-                                money -= 10;
-                            }
-                        }
-                    }
-                    if (str == "exit" || money == 0)
-                    {
-                        Console.WriteLine("Not enough money");
-                    }
-                    else
-                    {
-                        Console.WriteLine("OK");
-                        delivery = price - 10;
-                        pechenie -= 1;
-                    }
+                    input_money(10, ref money, ref pechenie);
                     break;
                 case "vafli":
-                    while (price < 30 && str != "exit")
-                    {
-                        str = Console.ReadLine();
-                        if (str == "1" || str == "2" || str == "5" || str == "10")
-                        {
-                            price = price + Convert.ToInt32(str, 10);
-                            if (str == "1")
-                            {
-                                one += 1;
-                                money -= 1;
-                            }
-                            if (str == "2")
-                            {
-                                two += 1;
-                                money -= 2;
-                            }
-                            if (str == "5")
-                            {
-                                five += 1;
-                                money -= 5;
-                            }
-                            if (str == "10")
-                            {
-                                ten += 1;
-                                money -= 10;
-                            }
-                        }
-                    }
-                    if (str == "exit" || money == 0)
-                    {
-                        Console.WriteLine("Not enough money");
-                    }
-                    else
-                    {
-                        Console.WriteLine("OK");
-                        delivery = price - 30;
-                        vafli -= 1;
-                    }
+                    input_money(30, ref money, ref vafli);
                     break;
             }
             product = "Unknown";
         }
-        public void take(ref int money)
+        protected void input_money(int price, ref int money, ref int n)//метод, обрабатывающий ввод пользователем денег при покупке выбранного продукта
+        {
+            int counter = 0;
+            string str = "";
+            while (counter < price && str != "exit")
+            {
+                str = Console.ReadLine();
+                if (str == "1" || str == "2" || str == "5" || str == "10")
+                {
+                    counter = counter + Convert.ToInt32(str, 10);
+                    if (str == "1")
+                    {
+                        one += 1;
+                        money -= 1;
+                        delivery += 1;
+                    }
+                    if (str == "2")
+                    {
+                        two += 1;
+                        money -= 2;
+                        delivery += 2;
+                    }
+                    if (str == "5")
+                    {
+                        five += 1;
+                        money -= 5;
+                        delivery += 5;
+                    }
+                    if (str == "10")
+                    {
+                        ten += 1;
+                        money -= 10;
+                        delivery += 10;
+                    }
+                }
+            }
+            if (money == 0)
+            {
+                Console.WriteLine("Not enough money");
+            }
+            else if (str != "exit")
+            {
+                Console.WriteLine("OK");
+                delivery = counter - price;
+                n -= 1;
+            }
+        }
+        public void take(ref int money)//берем сдачу
         {
             if (delivery == 0)
             {
@@ -242,6 +174,7 @@ namespace ConsoleApplication1
                         return;
                     }
                 }
+                Console.WriteLine("OK");
             }
         }
 
@@ -250,10 +183,10 @@ namespace ConsoleApplication1
     {
         static void Main(string[] args)
         {
-            int money = 150;
-            string str;
+            int money = 150;// кошелек покупателя
+            string str = "";
             Avtomat Avt = new Avtomat(1, 1, 1, 1);
-            while (true)
+            while (true)//бесконечный цикл для работы автомата
             {
                 Console.WriteLine("Do one of the actions: select, buy, take or stop");
                 str = Console.ReadLine();

@@ -90,7 +90,7 @@ namespace ConsoleApplication1
         {
             int counter = 0;
             string str = "";
-            while (counter < price && str != "exit")
+            while (counter < price && str != "exit" && money > 0)
             {
                 str = Console.ReadLine();
                 if (str == "1" || str == "2" || str == "5" || str == "10")
@@ -124,13 +124,17 @@ namespace ConsoleApplication1
             }
             if (money == 0)
             {
-                Console.WriteLine("Not enough money");
+                Console.WriteLine("Your money is over");
             }
             else if (str != "exit")
             {
                 Console.WriteLine("OK");
                 delivery = counter - price;
                 n -= 1;
+            }
+            else if (str == "exit")
+            {
+                Console.WriteLine("Not enough money");
             }
         }
         public void take(ref int money)//берем сдачу
@@ -183,7 +187,7 @@ namespace ConsoleApplication1
     {
         static void Main(string[] args)
         {
-            int money = 150;// кошелек покупателя
+            int money = 10;// кошелек покупателя
             string str = "";
             Avtomat Avt = new Avtomat(1, 1, 1, 1);
             while (true)//бесконечный цикл для работы автомата
@@ -205,10 +209,6 @@ namespace ConsoleApplication1
                     Avt.take(ref money);
                 }
                 else if (str == "stop")
-                {
-                    return;
-                }
-                if (money == 0)
                 {
                     return;
                 }
